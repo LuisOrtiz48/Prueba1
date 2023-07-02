@@ -25,6 +25,7 @@ public class SQLiteConnection extends SQLiteOpenHelper
     {
         /* Eliminando objetos de la base de datos*/
         sqLiteDatabase.execSQL(ConfigDB.DropTBPersonas);
+        /*Pasando datos nuevos*/
         onCreate(sqLiteDatabase);
     }
 }

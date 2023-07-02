@@ -27,6 +27,6 @@ public class ConfigDB
     // Creacion de objetos DML para poder seleccionar informacio de la base de datos
     public static final String SelectTBPersonas = "SELECT * FROM" + ConfigDB.tblpersonas;
 
-    public static final String Enpty = "";
+    public static final String Empty = "";
 
 }

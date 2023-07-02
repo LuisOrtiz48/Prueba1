@@ -20,7 +20,8 @@ public class Activityingresar extends AppCompatActivity {
     Spinner genero;
     Button btningresar;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresar);
 
@@ -73,10 +74,10 @@ public class Activityingresar extends AppCompatActivity {
 
     private void ClearScreen()
     {
-        nombres.setText(ConfigDB.Enpty);
-        apellidos.setText(ConfigDB.Enpty);
-        direccion.setText(ConfigDB.Enpty);
-        edad.setText(ConfigDB.Enpty);
-        correo.setText(ConfigDB.Enpty);
+        nombres.setText(ConfigDB.Empty);
+        apellidos.setText(ConfigDB.Empty);
+        direccion.setText(ConfigDB.Empty);
+        edad.setText(ConfigDB.Empty);
+        correo.setText(ConfigDB.Empty);
     }
 }
