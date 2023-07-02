@@ -70,7 +70,7 @@ public class ActivityList extends AppCompatActivity
     {
         arreglopersonas = new ArrayList<String>();
 
-        for(int i=0; i <listpersonas.size(); i++)
+        for(int i=0; i < listpersonas.size(); i++)
         {
             arreglopersonas.add(listpersonas.get(i).getId() + " - "
                     +listpersonas.get(i).getNombres() + " - "

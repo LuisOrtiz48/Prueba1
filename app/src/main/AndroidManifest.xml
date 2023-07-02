@@ -27,8 +27,6 @@
             android:name=".Activityingresar"
             android:exported="true">
 
-
-
         </activity>
         <activity
             android:name=".MainActivity"
