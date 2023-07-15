@@ -8,6 +8,19 @@
     tools:context=".Activityingresar">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnfoto"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="CAPTURA" />
+
     <EditText
         android:id="@+id/txtid"
         android:layout_width="match_parent"
@@ -64,8 +77,9 @@
 
     <Button
         android:id="@+id/btningresar"
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Ingresar" />
 
 </LinearLayout>
