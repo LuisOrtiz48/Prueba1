@@ -12,8 +12,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 import com.example.tlenguajes2023.Configuracion.ConfigDB;
 import com.example.tlenguajes2023.Configuracion.SQLiteConnection;
 
+import java.io.ByteArrayOutputStream;
+
 public class Activityingresar extends AppCompatActivity {
 
     public static final int peticion_acceso_camara = 101;
@@ -32,7 +36,7 @@ public class Activityingresar extends AppCompatActivity {
 
     EditText id, nombres, apellidos, direccion, edad, correo;
     Spinner genero;
-    Button btningresar, btnfoto;
+    Button btningresar, btnfoto, btneliminar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -49,20 +53,34 @@ public class Activityingresar extends AppCompatActivity {
         btningresar = (Button) findViewById(R.id.btningresar);
         btnfoto = (Button) findViewById(R.id.btnfoto);
         fotoview = (ImageView) findViewById(R.id.imageView);
-
         btningresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Insertar_datos();
             }
         });
-
         btnfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Permisos();
             }
         });
+        btneliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Eliminar_datos();
+            }
+        });
+
+    }
+
+    private void Eliminar_datos()
+    {
+        SQLiteConnection conexion = new SQLiteConnection(this, ConfigDB.namebd, null, 1);
+        SQLiteDatabase db = conexion.getWritableDatabase();
+        String deleteQuery = "DELETE FROM " + ConfigDB.tblpersonas;
+        db.execSQL(deleteQuery);
 
     }
 
@@ -104,12 +122,26 @@ public class Activityingresar extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode == peticion_toma_fotografia)
         {
             Bundle extras = data.getExtras();
-            Bitmap image = (Bitmap) extras.get("data");
-            fotoview.setImageBitmap(image);
+            Bitmap imagen = (Bitmap) extras.get("data");
+            fotoview.setImageBitmap(imagen);
+
+            correo.setText(ImagetoBase64());
         }
+    }
+
+    private String ImagetoBase64()
+    {
+        Bitmap imagen = ((BitmapDrawable) fotoview.getDrawable()).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imagen.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] image = byteArrayOutputStream.toByteArray();
+        String Base64Image = Base64.encodeToString(image, Base64.DEFAULT);
+
+        return Base64Image;
     }
 
     private void Insertar_datos()
@@ -124,6 +156,7 @@ public class Activityingresar extends AppCompatActivity {
         values.put(ConfigDB.direccion,direccion.getText().toString());
         values.put(ConfigDB.edad,edad.getText().toString());
         values.put(ConfigDB.correo,correo.getText().toString());
+        values.put(ConfigDB.foto, ImagetoBase64());
 
         Long resultado = db.insert(ConfigDB.tblpersonas, ConfigDB.id, values);
         if(resultado > 0)
@@ -148,5 +181,6 @@ public class Activityingresar extends AppCompatActivity {
         direccion.setText(ConfigDB.Empty);
         edad.setText(ConfigDB.Empty);
         correo.setText(ConfigDB.Empty);
+        fotoview.setImageDrawable(null);
     }
 }

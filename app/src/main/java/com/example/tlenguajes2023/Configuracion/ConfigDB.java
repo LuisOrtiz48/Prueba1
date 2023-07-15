@@ -18,15 +18,18 @@ public class ConfigDB
     public static final String edad = "edad";
     public static final String correo = "correo";
 
+    public static final String foto = "foto";
+
     // Creacion de objectos DDL - CREATE - DROP - ALTER
     public static final String CreateTBPersonas = "CREATE TABLE PERSONAS (id INTEGER PRIMARY KEY AUTOINCREMENT, nombres TEXT," +
-            "apellidos TEXT, genero TEXT, direccion TEXT, edad INTEGER, correo TEXT)";
+            "apellidos TEXT, genero TEXT, direccion TEXT, edad INTEGER, correo TEXT, foto BLOB)";
 
     public static final String DropTBPersonas = "DROP TABLE IF EXISTS PERSONAS";
 
     // Creacion de objetos DML para poder seleccionar informacio de la base de datos
     public static final String SelectTBPersonas = "SELECT * FROM" + ConfigDB.tblpersonas;
 
+    public static final String DeleteTBPersonas = "DELETE FROM" + ConfigDB.tblpersonas;
     public static final String Empty = "";
 
 }

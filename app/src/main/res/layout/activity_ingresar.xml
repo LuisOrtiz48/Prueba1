@@ -82,4 +82,11 @@
         android:layout_gravity="center"
         android:text="Ingresar" />
 
+    <Button
+        android:id="@+id/btneliminar"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="ELIMINAR" />
+
 </LinearLayout>
